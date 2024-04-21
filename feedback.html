@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+         body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('car.jpg');
+            background-size: cover;
+            color: #fff;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; /* Ensures full viewport height */
+        }
+        body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('car.jpg'); /* Same background image as body */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(2px); /* Adjust the blur radius as needed */
+    z-index: -1; /* Ensures the blurred background stays behind other content */
+}
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            color:white;
+        }
+        p {
+            line-height: 1.6;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/f193281b59.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Feedback</h1>
+            <button>
+    
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+            </button>
+        <h2>Feedback Form</h2>
+        <form action="" method="POST">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="text" id="email" name="email" required>
+
+            <label for="message">Your Feedback:</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <input type="submit" value="Submit Feedback">
+        </form>
+    </div>
+</body>
+</html>

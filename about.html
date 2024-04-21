@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('car.jpg');
+            background-size: cover;
+            color: #fff;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; /* Ensures full viewport height */
+        }
+        body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('car.jpg'); /* Same background image as body */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: blur(2px); /* Adjust the blur radius as needed */
+    z-index: -1; /* Ensures the blurred background stays behind other content */
+}
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h2 {
+            color:white;
+        }
+        p {
+            line-height: 1.6;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/f193281b59.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <h1>About Us</h1>
+        <button>
+
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+        </button>
+    </header>
+    <section>
+        <div class="container">
+            <h2>Our Company</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum ipsum eget libero convallis, ac lacinia eros lacinia. Nulla facilisi. Aliquam auctor lorem non nisl rhoncus, vitae sodales nunc lacinia. Integer sed est quis quam aliquet luctus. Duis efficitur nec magna sit amet ultricies. Nam eget est nisl. Donec dapibus, ligula vel venenatis congue, justo metus efficitur turpis, nec ultricies urna lorem a risus.</p>
+            <h2>Our Team</h2>
+            <p>Meet our dedicated team of professionals who are committed to providing you with the best service possible:</p>
+            <ul>
+                <li>Amit Satyam - Developer</li>
+                <li>Nancy Kumari - Developer</li>
+                <li>Sparsh Athgarha - Developer</li>
+                <li>Harshit Agrawal - Developer</li>
+                <li>Somiya Singh - Developer</li>
+            </ul>
+            <h2>Our Mission</h2>
+            <p>Our mission is to...</p>
+        </div>
+    </section>
+</body>
+</html>
