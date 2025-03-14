@@ -3,82 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>About Us - Parking Management System</title>
     <style>
-        body {
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #f8f9fa;
+            --card-bg: rgba(0, 0, 0, 0.7);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('car.jpg');
             background-size: cover;
-            color: #fff;
             background-position: center;
             background-attachment: fixed;
-            height: 100vh; /* Ensures full viewport height */
+            filter: blur(3px) brightness(0.6);
+            z-index: -1;
         }
-        body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('car.jpg'); /* Same background image as body */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    filter: blur(2px); /* Adjust the blur radius as needed */
-    z-index: -1; /* Ensures the blurred background stays behind other content */
-}
+        
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-color);
+            padding: 1.5rem 0;
             text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .back-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
         section {
-            padding: 20px;
+            padding: 2rem 0;
         }
+        
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 1s ease-in-out;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         h2 {
-            color:white;
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
+        
         p {
-            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .team-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .team-list li {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .team-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .team-list li::before {
+            content: "\f007";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .mission-list {
+            margin: 1.5rem 0;
+        }
+        
+        .mission-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            background-color: rgba(44, 62, 80, 0.4);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-item:hover {
+            background-color: rgba(44, 62, 80, 0.6);
+            transform: translateX(5px);
+        }
+        
+        .mission-item::before {
+            content: "\f0eb";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 0 1rem;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .team-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .back-button {
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
     <script src="https://kit.fontawesome.com/f193281b59.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <h1>About Us</h1>
-        <button>
-
+        <button class="back-button">
             <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
         </button>
+        <h1>About Us</h1>
     </header>
     <section>
         <div class="container">
             <h2>Our Company</h2>
             <p>The Parking Management System is a comprehensive solution designed to streamline the management of parking spaces in various environments, such as commercial complexes, residential areas, and public parking lots. This project aims to leverage Java programming language and MySQL database management system to develop an efficient and user-friendly application for managing parking operations.</p>
+            
             <h2>Our Team</h2>
             <p>Meet our dedicated team of professionals who are committed to providing you with the best service possible:</p>
-            <ul>
+            <ul class="team-list">
                 <li>Amit Satyam - Developer</li>
-                <li>Nancy Kumari - Developer</li>
+                <li>Dev Kumar - Developer</li>
                 <li>Sparsh Athgarha - Developer</li>
                 <li>Harshit Agrawal - Developer</li>
-                <li>Somiya Singh - Developer</li>
+                <li>Vedanand - Developer</li>
             </ul>
+            
             <h2>Our Mission</h2>
-            <p>-> Automate the process of parking space allocation and management.</p>
-            <p>-> Provide real-time monitoring of parking space availability.</p>
-            <p>-> Enhance security through digitalized access control and surveillance.</p>
-            <p>-> Improve user experience through a user-friendly interface.</p>
-            <p>-> Generate comprehensive reports for analysis and decision-making.</p>
+            <div class="mission-list">
+                <div class="mission-item">Automate the process of parking space allocation and management.</div>
+                <div class="mission-item">Provide real-time monitoring of parking space availability.</div>
+                <div class="mission-item">Enhance security through digitalized access control and surveillance.</div>
+                <div class="mission-item">Improve user experience through a user-friendly interface.</div>
+                <div class="mission-item">Generate comprehensive reports for analysis and decision-making.</div>
+            </div>
         </div>
     </section>
 </body>

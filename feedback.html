@@ -3,79 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form</title>
+    <title>Feedback Form - Parking Management System</title>
     <style>
-         body {
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --text-color: #f8f9fa;
+            --card-bg: rgba(0, 0, 0, 0.7);
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('car.jpg');
             background-size: cover;
-            color: #fff;
             background-position: center;
             background-attachment: fixed;
-            height: 100vh; /* Ensures full viewport height */
+            filter: blur(3px) brightness(0.6);
+            z-index: -1;
         }
-        body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('car.jpg'); /* Same background image as body */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    filter: blur(2px); /* Adjust the blur radius as needed */
-    z-index: -1; /* Ensures the blurred background stays behind other content */
-}
+        
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-color);
+            padding: 1.5rem 0;
             text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
-        section {
-            padding: 20px;
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+        
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .back-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 2rem auto;
+            padding: 0;
         }
+        
+        .form-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 2rem;
+            margin-top: 2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         h2 {
-            color:white;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
-        p {
-            line-height: 1.6;
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        label {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 0.3rem;
+        }
+        
+        input, textarea {
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: inherit;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        input[type="submit"]:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .back-button {
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
     <script src="https://kit.fontawesome.com/f193281b59.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Feedback</h1>
-            <button>
+    <header>
+        <button class="back-button">
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
+        </button>
+        <h1>Feedback</h1>
+    </header>
     
-                <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
-            </button>
-        <h2>Feedback Form</h2>
-        <form action="" method="POST">
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Your Email:</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="message">Your Feedback:</label>
-            <textarea id="message" name="message" required></textarea>
-
-            <input type="submit" value="Submit Feedback">
-        </form>
+    <div class="container">
+        <div class="form-container">
+            <h2>Share Your Thoughts</h2>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Feedback</label>
+                    <textarea id="message" name="message" placeholder="Please share your thoughts, suggestions, or experiences..." required></textarea>
+                </div>
+                
+                <input type="submit" value="Submit Feedback">
+            </form>
+        </div>
     </div>
 </body>
 </html>

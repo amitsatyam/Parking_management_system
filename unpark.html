@@ -6,83 +6,463 @@
     <title>Unparking Page</title>
     <style>
         /* General styles */
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: #4CAF50;
+            --primary-hover: #45a049;
+            --dark-color: #333;
+            --light-color: #f9f9f9;
+            --border-color: #ddd;
+            --text-color: #333;
+            --success-color: #d4edda;
+            --success-text: #155724;
+        }
+        
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
+        
         h1, h2 {
             text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
         }
+        
         p {
             line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #666;
         }
+        
         /* Navbar styles */
         nav {
-            background-color: #333;
+            background-color: var(--dark-color);
             color: #fff;
-            padding: 10px 0;
-            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            margin-right: 8px;
+        }
+        
+        .nav-links {
+            display: flex;
+        }
+        
         nav a {
             color: #fff;
             text-decoration: none;
             padding: 0 15px;
+            transition: color 0.3s ease;
         }
+        
+        nav a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Card styles */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
         /* Unparking form styles */
         form {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
             margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
-        input[type="text"],
-        input[type="submit"] {
+        
+        input[type="text"] {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+            padding: 12px;
+            border: 1px solid var(--border-color);
             border-radius: 4px;
-            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
         }
-        input[type="submit"] {
-            background-color: #4CAF50;
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
             color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
         }
-        input[type="submit"]:hover {
-            background-color: #45a049;
+        
+        button[type="submit"]:hover {
+            background-color: var(--primary-hover);
+        }
+        
+        button[type="submit"]:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Instructions section */
+        .instructions {
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .instructions h2 {
+            text-align: left;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: var(--success-color);
+            color: var(--success-text);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .success-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .receipt {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+        
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .receipt-label {
+            color: #666;
+        }
+        
+        .receipt-value {
+            font-weight: 500;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav a {
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About Us</a>
-        <a href="concept.html">Contact Us</a>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🅿️</span> ParkEasy
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
     </nav>
+    
     <div class="container">
-        <h1>Unparking Page</h1>
-        <p>Please provide your parking details to complete the unparking process:</p>
-        <form action="" method="POST">
-            <label for="spot_id">Parking Spot ID:</label>
-            <input type="text" id="spot_id" name="spot_id" required>
-            
-            <label for="license_plate">License Plate Number:</label>
-            <input type="text" id="license_plate" name="license_plate" required>
-            
-            <input type="submit" value="Confirm Unparking">
-        </form>
+        <div class="card">
+            <div class="card-header">
+                <h1>Unparking Page</h1>
+            </div>
+            <div class="card-body">
+                <p>Please provide your parking details to complete the unparking process:</p>
+                
+                <form id="unparkingForm">
+                    <div class="form-group">
+                        <label for="spot_id">Parking Spot ID:</label>
+                        <input type="text" id="spot_id" name="spot_id" required>
+                        <div class="error-message" id="spot_id_error">Please enter a valid Parking Spot ID</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="license_plate">License Plate Number:</label>
+                        <input type="text" id="license_plate" name="license_plate" required>
+                        <div class="error-message" id="license_plate_error">Please enter a valid License Plate Number</div>
+                    </div>
+                    
+                    <button type="submit" id="submitBtn">Confirm Unparking</button>
+                </form>
+                
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✓</div>
+                    <h2>Unparking Confirmed!</h2>
+                    <p>Your vehicle has been successfully unparked.</p>
+                    
+                    <div class="receipt" id="receipt">
+                        <h3 style="text-align: center; margin-bottom: 15px;">Receipt Summary</h3>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Spot ID:</span>
+                            <span class="receipt-value" id="receiptSpotId"></span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">License Plate:</span>
+                            <span class="receipt-value" id="receiptLicensePlate"></span>
+                        </div>
+                        <div class="receipt-row">
+                            <span class="receipt-label">Exit By:</span>
+                            <span class="receipt-value" id="receiptExitBy"></span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-secondary" id="resetBtn">Unpark Another Vehicle</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>Unparking Instructions</h2>
+            <ul>
+                <li>Enter the Parking Spot ID found on your parking receipt</li>
+                <li>Verify your license plate number matches your vehicle</li>
+                <li>Submit the form to confirm your departure</li>
+                <li>The barrier will open automatically upon confirmation</li>
+                <li>Please exit within 15 minutes of confirmation</li>
+            </ul>
+        </div>
     </div>
+    
+    <footer>
+        &copy; <span id="currentYear"></span> ParkEasy Parking Solutions. All rights reserved.
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Form validation and submission
+        const form = document.getElementById('unparkingForm');
+        const spotIdInput = document.getElementById('spot_id');
+        const licensePlateInput = document.getElementById('license_plate');
+        const spotIdError = document.getElementById('spot_id_error');
+        const licensePlateError = document.getElementById('license_plate_error');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+        const resetBtn = document.getElementById('resetBtn');
+        
+        // Receipt elements
+        const receiptSpotId = document.getElementById('receiptSpotId');
+        const receiptLicensePlate = document.getElementById('receiptLicensePlate');
+        const receiptExitBy = document.getElementById('receiptExitBy');
+        
+        // Validate spot ID (alphanumeric)
+        spotIdInput.addEventListener('input', function() {
+            const isValid = /^[A-Z0-9-]+$/i.test(this.value);
+            if (!isValid && this.value) {
+                spotIdError.style.display = 'block';
+                this.classList.add('error');
+            } else {
+                spotIdError.style.display = 'none';
+                this.classList.remove('error');
+            }
+        });
+        
+        // Validate license plate (alphanumeric with spaces and hyphens)
+        licensePlateInput.addEventListener('input', function() {
+            const isValid = /^[A-Z0-9 -]+$/i.test(this.value);
+            if (!isValid && this.value) {
+                licensePlateError.style.display = 'block';
+                this.classList.add('error');
+            } else {
+                licensePlateError.style.display = 'none';
+                this.classList.remove('error');
+            }
+        });
+        
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            let isValid = true;
+            
+            if (!spotIdInput.value) {
+                spotIdError.textContent = 'Parking Spot ID is required';
+                spotIdError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!licensePlateInput.value) {
+                licensePlateError.textContent = 'License Plate Number is required';
+                licensePlateError.style.display = 'block';
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call with timeout
+            setTimeout(function() {
+                // Update receipt information
+                receiptSpotId.textContent = spotIdInput.value;
+                receiptLicensePlate.textContent = licensePlateInput.value;
+                
+                // Calculate exit time (15 minutes from now)
+                const exitTime = new Date();
+                exitTime.setMinutes(exitTime.getMinutes() + 15);
+                receiptExitBy.textContent = exitTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset button state
+                submitBtn.textContent = 'Confirm Unparking';
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+        
+        // Reset button to unpark another vehicle
+        resetBtn.addEventListener('click', function() {
+            // Hide success message and show form
+            successMessage.style.display = 'none';
+            form.style.display = 'block';
+            
+            // Clear form inputs
+            form.reset();
+        });
+    </script>
 </body>
 </html>

@@ -5,79 +5,267 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parking Management System Concept</title>
     <style>
-        body {
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-color: #f8f9fa;
+            --card-bg: rgba(0, 0, 0, 0.7);
+        }
+        
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('car.jpg');
             background-size: cover;
-            color: #fff;
             background-position: center;
             background-attachment: fixed;
-            height: 100vh; /* Ensures full viewport height */
+            filter: blur(3px) brightness(0.6);
+            z-index: -1;
         }
-        body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('car.jpg'); /* Same background image as body */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    filter: blur(2px); /* Adjust the blur radius as needed */
-    z-index: -1; /* Ensures the blurred background stays behind other content */
-}
+        
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--text-color);
+            padding: 1.5rem 0;
             text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
-        section {
-            padding: 20px;
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+        
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .back-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 1s ease-in-out;
         }
-        h2 {
-            color:white;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+        
         p {
-            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        
+        ol, ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        ol li, ul li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        ol {
+            counter-reset: item;
+            list-style-type: none;
+        }
+        
+        ol li {
+            counter-increment: item;
+            padding-left: 2.5rem;
+        }
+        
+        ol li::before {
+            content: counter(item);
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        ul li {
+            padding-left: 2.5rem;
+        }
+        
+        ul li::before {
+            content: "\f0ad";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .tech-item {
+            background-color: rgba(52, 152, 219, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .tech-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(52, 152, 219, 0.3);
+        }
+        
+        .component-item {
+            background-color: rgba(231, 76, 60, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .component-item:hover {
+            transform: translateX(5px);
+            background-color: rgba(231, 76, 60, 0.3);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .back-button {
+                width: 35px;
+                height: 35px;
+            }
+            
+            ol li, ul li {
+                padding-left: 2rem;
+            }
         }
     </style>
     <script src="https://kit.fontawesome.com/f193281b59.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
     <header>
-        <h1>Parking Management System Concept</h1>
-        <button>
-
+        <button class="back-button">
             <a href="index.html"><i class="fa-solid fa-arrow-left"></i></a>
         </button>
+        <h1>Parking Management System Concept</h1>
     </header>
+    
     <div class="container">
         <p>A Parking Management System is a software solution designed to manage parking lots efficiently. It typically involves several key components:</p>
+        
+        <h2 class="section-title">Key Components</h2>
         <ol>
-            <li><strong>User Management:</strong> Users can register, login, and manage their accounts. This includes updating personal information and viewing booking history.</li>
-            <li><strong>Parking Spot Management:</strong> The system maintains information about available parking spots, including their location, availability status, and pricing.</li>
-            <li><strong>Booking System:</strong> Users can book parking spots in advance. The system checks availability and allows users to select spots based on their preferences.</li>
-            <li><strong>Payment Integration:</strong> Users can make payments for parking bookings securely through integrated payment gateways. The system handles payment processing and generates invoices.</li>
-            <li><strong>Admin Panel:</strong> Administrators have access to a dashboard where they can manage users, parking spots, bookings, and generate reports.</li>
+            <li class="component-item"><strong>User Management:</strong> Users can register, login, and manage their accounts. This includes updating personal information and viewing booking history.</li>
+            <li class="component-item"><strong>Parking Spot Management:</strong> The system maintains information about available parking spots, including their location, availability status, and pricing.</li>
+            <li class="component-item"><strong>Booking System:</strong> Users can book parking spots in advance. The system checks availability and allows users to select spots based on their preferences.</li>
+            <li class="component-item"><strong>Payment Integration:</strong> Users can make payments for parking bookings securely through integrated payment gateways. The system handles payment processing and generates invoices.</li>
+            <li class="component-item"><strong>Admin Panel:</strong> Administrators have access to a dashboard where they can manage users, parking spots, bookings, and generate reports.</li>
         </ol>
+        
+        <h2 class="section-title">Implementation Technologies</h2>
         <p>To implement a Parking Management System using Java and MySQL, you would typically use Java for the backend logic and MySQL for the database storage. Here's a high-level overview of the technologies involved:</p>
+        
         <ul>
-            <li><strong>Java:</strong> Java provides a robust platform for developing server-side applications. You can use Java Servlets or Spring Framework to handle HTTP requests, business logic, and database interactions.</li>
-            <li><strong>MySQL:</strong> MySQL is a popular open-source relational database management system. You can use it to store user data, parking spot information, booking details, and other relevant data.</li>
-            <li><strong>JDBC (Java Database Connectivity):</strong> JDBC is a Java API that allows Java applications to interact with relational databases like MySQL. You can use JDBC to establish connections, execute SQL queries, and retrieve results from the database.</li>
-            <li><strong>HTML/CSS:</strong> HTML and CSS are used to create the user interface for the Parking Management System. HTML defines the structure of web pages, while CSS is used for styling and layout.</li>
-            <li><strong>JavaScript:</strong> JavaScript can be used to add interactivity to the user interface, such as form validation, dynamic content updates, and AJAX requests for asynchronous data retrieval.</li>
+            <li class="tech-item"><strong>Java:</strong> Java provides a robust platform for developing server-side applications. You can use Java Servlets or Spring Framework to handle HTTP requests, business logic, and database interactions.</li>
+            <li class="tech-item"><strong>MySQL:</strong> MySQL is a popular open-source relational database management system. You can use it to store user data, parking spot information, booking details, and other relevant data.</li>
+            <li class="tech-item"><strong>JDBC (Java Database Connectivity):</strong> JDBC is a Java API that allows Java applications to interact with relational databases like MySQL. You can use JDBC to establish connections, execute SQL queries, and retrieve results from the database.</li>
+            <li class="tech-item"><strong>HTML/CSS:</strong> HTML and CSS are used to create the user interface for the Parking Management System. HTML defines the structure of web pages, while CSS is used for styling and layout.</li>
+            <li class="tech-item"><strong>JavaScript:</strong> JavaScript can be used to add interactivity to the user interface, such as form validation, dynamic content updates, and AJAX requests for asynchronous data retrieval.</li>
         </ul>
+        
         <p>By combining these technologies effectively, you can create a robust and efficient Parking Management System that meets the needs of both users and administrators.</p>
     </div>
 </body>
